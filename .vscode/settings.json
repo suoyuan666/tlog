@@ -1,0 +1,5 @@
+{
+    "cmake.configureArgs": [
+        "-DTLOG_DEV_TEST=ON"
+    ]
+}
