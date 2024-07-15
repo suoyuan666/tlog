@@ -17,13 +17,13 @@ C++ 标准: C++ 17
 #include <tlog.h>
 
 auto main() -> int {
-    tlog::tprint({"test", "测试"}, tlog::tlog_status::INFO, tlog::NO_LOG_FILE);
-    tlog::tprint({"test", "测试"}, tlog::tlog_status::DEBUG, tlog::NO_LOG_FILE);
-    tlog::tprint({"test", "测试"}, tlog::tlog_status::ERROR, tlog::NO_LOG_FILE);
-    tlog::tprint({"test", "测试"}, tlog::tlog_status::SUCCESS, tlog::NO_LOG_FILE);
-    tlog::tprint({"test", "测试"}, tlog::tlog_status::WARNNING, tlog::NO_LOG_FILE);
-    return 0;
-}
+  tlog::tprint({"test", "测试"}, tlog::tlog_status::INFO, tlog::NO_LOG_FILE);
+  tlog::tprint({"test", "测试"}, tlog::tlog_status::SUCCESS, tlog::NO_LOG_FILE);
+  tlog::tprint({"test", "测试"}, tlog::tlog_status::DEBUG, tlog::NO_LOG_FILE);
+  tlog::tprint({"test", "测试"}, tlog::tlog_status::WARNNING, tlog::NO_LOG_FILE);
+  tlog::tprint({"test", "测试"}, tlog::tlog_status::ERROR, tlog::NO_LOG_FILE);
+  return 0;
+
 ```
 
 `tlog::tprint()` 的第一个参数是要输出的值，这是一个 `std::initializer_list<std::string_view>` 类，第二个参数是该消息的级别，tlog 提供了五个级别: `SUCCESS`, `INFO`, `DEBUG`, `WARNNING` 和 `ERROR`，第三个参数用于表示该log信息保存的日志文件内容，默认提供了两个: `tlog::NO_LOG_FILE` 和 `tlog::DEFAULT_LOG_FILE`，前者设置不产生日志文件，后者是一个默认的日志文件路径 **/tmp/tlog.log**。
@@ -31,3 +31,7 @@ auto main() -> int {
 效果图:
 
 ![tprint demo](assets/img/tlog_tprint_demo.png)
+
+## 开发
+
+使用 CMake 编译项目时可以添加 `-DTLOG_DEV_TEST=ON` 即添加测试用例。如果使用 [Visual Studio Code](https://code.visualstudio.com/) 开发的话，我已经将该设置添加到 **.vscode/settings.json** 中了，只需要安装 [CMake Tools](https://github.com/microsoft/vscode-cmake-tools) 插件即可使用。

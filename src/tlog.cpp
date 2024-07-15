@@ -12,12 +12,12 @@
 namespace tlog {
 
 static const std::string INFO_PREFIX = "[INFO]";
-// rgb(255, 255, 0): yellow
-static const std::string DEBUG_PREFIX =
-    fmt::format(fg(fmt::rgb(255, 255, 0)), "[DEBUG]");
 // rgb(0, 255, 255): blue
+static const std::string DEBUG_PREFIX =
+    fmt::format(fg(fmt::rgb(0, 255, 255)), "[DEBUG]");
+// rgb(255, 255, 0): yellow
 static const std::string WARNNING_PREFIX =
-    fmt::format(fg(fmt::rgb(0, 255, 255)), "[WARNNING]");
+    fmt::format(fg(fmt::rgb(255, 255, 0)), "[WARNNING]");
 // rgb(255, 0, 0): red
 static const std::string ERROR_PREFIX =
     fmt::format(fg(fmt::rgb(255, 0, 0)), "[ERROR]");
