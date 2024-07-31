@@ -3,8 +3,11 @@
 #include <fmt/ostream.h>
 #include <tlog.h>
 
+#include <chrono>
 #include <cstdio>
+#include <ctime>
 #include <fstream>
+#include <iomanip>
 #include <ios>
 #include <string>
 #include <string_view>
@@ -25,9 +28,9 @@ static const std::string ERROR_PREFIX =
 static const std::string SUCCESS_PREFIX =
     fmt::format(fg(fmt::rgb(0, 255, 0)), "[SUCCESS]");
 
-
 auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
             const std::pair<bool, std::string_view>& wf) -> void {
+  const auto now_time = std::chrono::system_clock::now();
   if (src.size() == 0) {
     return;
   }
@@ -56,7 +59,9 @@ auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
       break;
   }
 
-  const std::string message = fmt::format("{} {}\n", *prefix, val);
+  auto t_c = std::chrono::system_clock::to_time_t(now_time);
+  const std::string message = fmt::format("{} {:%Y-%m-%d %H:%M:%S}: {}\n",
+                                          *prefix, fmt::localtime(t_c), val);
 
   if (status == tlog_status::ERROR || status == tlog_status::WARNNING) {
     fmt::print(stderr, "{}", message);

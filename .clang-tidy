@@ -24,7 +24,7 @@ Checks:     '
             -readability-function-cognitive-complexity,
             -readability-magic-numbers,
             -readability-make-member-function-const,
-            -readability-qualified-auto,
+            # -readability-qualified-auto,
             -readability-identifier-naming,
             -readability-redundant-access-specifiers,
             -bugprone-exception-escape,
