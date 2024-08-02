@@ -16,7 +16,7 @@ if(EXISTS "${PATH_TO_CMAKELISTS_TXT}")
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Wall -Werror -Weffc++ -Wextra -Wconversion -Wsign-conversion")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Wall -Werror -Wextra -Wconversion -Wsign-conversion")
 endif()
 
 if(TLOG_DEV_TEST)
