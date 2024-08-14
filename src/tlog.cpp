@@ -8,33 +8,34 @@
 #include <ctime>
 #include <fstream>
 #include <ios>
+#include <memory>
 #include <string>
 #include <string_view>
 
 namespace tlog {
 
-static const std::string INFO_PREFIX = "[INFO]";
-// rgb(0, 255, 255): blue
-static const std::string DEBUG_PREFIX =
-    fmt::format(fg(fmt::rgb(0, 255, 255)), "[DEBUG]");
-// rgb(255, 255, 0): yellow
-static const std::string WARNNING_PREFIX =
-    fmt::format(fg(fmt::rgb(255, 255, 0)), "[WARNNING]");
-// rgb(255, 0, 0): red
-static const std::string ERROR_PREFIX =
-    fmt::format(fg(fmt::rgb(255, 0, 0)), "[ERROR]");
-// rgb(0, 255, 0): green
-static const std::string SUCCESS_PREFIX =
-    fmt::format(fg(fmt::rgb(0, 255, 0)), "[SUCCESS]");
-
 auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
             const std::pair<bool, std::string_view>& wf) -> void {
   const auto now_time = std::chrono::system_clock::now();
+  static const std::string INFO_PREFIX = "[INFO]";
+  // rgb(0, 255, 255): blue
+  static const std::string DEBUG_PREFIX =
+      fmt::format(fg(fmt::rgb(0, 255, 255)), "[DEBUG]");
+  // rgb(255, 255, 0): yellow
+  static const std::string WARNNING_PREFIX =
+      fmt::format(fg(fmt::rgb(255, 255, 0)), "[WARNNING]");
+  // rgb(255, 0, 0): red
+  static const std::string ERROR_PREFIX =
+      fmt::format(fg(fmt::rgb(255, 0, 0)), "[ERROR]");
+  // rgb(0, 255, 0): green
+  static const std::string SUCCESS_PREFIX =
+      fmt::format(fg(fmt::rgb(0, 255, 0)), "[SUCCESS]");
+
   if (src.size() == 0) {
     return;
   }
-  const std::string* prefix;
-  std::string val;
+  std::shared_ptr<std::string> prefix;
+  std::string val{};
 
   for (auto str : src) {
     val += str;
@@ -42,19 +43,19 @@ auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
 
   switch (status) {
     case INFO:
-      prefix = &INFO_PREFIX;
+      prefix = std::make_shared<std::string>(INFO_PREFIX);
       break;
     case DEBUG:
-      prefix = &DEBUG_PREFIX;
+      prefix = std::make_shared<std::string>(DEBUG_PREFIX);
       break;
     case WARNNING:
-      prefix = &WARNNING_PREFIX;
+      prefix = std::make_shared<std::string>(WARNNING_PREFIX);
       break;
     case ERROR:
-      prefix = &ERROR_PREFIX;
+      prefix = std::make_shared<std::string>(ERROR_PREFIX);
       break;
     case SUCCESS:
-      prefix = &SUCCESS_PREFIX;
+      prefix = std::make_shared<std::string>(SUCCESS_PREFIX);
       break;
   }
 
