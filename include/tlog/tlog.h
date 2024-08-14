@@ -3,18 +3,20 @@
 #include <utility>
 
 namespace tlog {
+
 enum tlog_status { SUCCESS, DEBUG, INFO, WARNNING, ERROR };
 
-constexpr std::pair<bool, std::string_view> NO_LOG_FILE{false, ""};
-constexpr std::pair<bool, std::string_view> DEFAULT_LOG_FILE{true, "/tmp/tlog.log"};
-
+// clang-format off
+constexpr std::pair<bool, std::string_view> NO_LOG_FILE {false, ""};
+constexpr std::pair<bool, std::string_view> DEFAULT_LOG_FILE {true, "/tmp/tlog.log"};
+// clang-format on
 /*
  * @brief formatted output with log levels
  *
  * @note this function is still under development
  *
  * @param `std::initializer_list<const std::string> src` is the string to be
- * output, pass the string in with `{"file: ", val}`
+ * output, pass the string in with `{"file: ", str}`
  * @param `tlog_status status` is an enum type, the value is `DEBUG`, `INFO`,
  * `WARNNING`, `ERROR`. If it is `ERROR` or `WARNNING`, it will be printed to
  * `stderr`, otherwise it will be printed to `stdoout`.
