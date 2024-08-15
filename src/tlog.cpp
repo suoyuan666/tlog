@@ -14,9 +14,8 @@
 
 namespace tlog {
 
-auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
+auto tprint(std::initializer_list<std::string_view>&& src, tlog_status status,
             const std::pair<bool, std::string_view>& wf) -> void {
-  const auto now_time = std::chrono::system_clock::now();
   static const std::string INFO_PREFIX = "[INFO]";
   // rgb(0, 255, 255): blue
   static const std::string DEBUG_PREFIX =
@@ -31,6 +30,11 @@ auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
   static const std::string SUCCESS_PREFIX =
       fmt::format(fg(fmt::rgb(0, 255, 0)), "[SUCCESS]");
 
+  if (src.size() == 0) {
+    return;
+  }
+
+  const auto now_time = std::chrono::system_clock::now();
   if (src.size() == 0) {
     return;
   }

@@ -26,6 +26,6 @@ constexpr std::pair<bool, std::string_view> DEFAULT_LOG_FILE {true, "/tmp/tlog.l
  * `NO_LOG_FILE` and `DEFAULT_LOG_FILE` to choose not to generate a log file or
  * use the default log file storage path.
  */
-auto tprint(std::initializer_list<std::string_view> src, tlog_status status,
+auto tprint(std::initializer_list<std::string_view>&& src, tlog_status status,
             const std::pair<bool, std::string_view>& wf) -> void;
 }  // namespace tlog
